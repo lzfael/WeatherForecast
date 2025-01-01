@@ -9,7 +9,7 @@ console.log(form);
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  if (!input) return;
+  if (!input || !tempoInfo) return;
   const localização = input.value;
   if (localização.length < 3) {
     alert("Digite uma localização válida");
@@ -24,8 +24,16 @@ form?.addEventListener("submit", async (event) => {
 
   const infos = {
     temperatura: Math.round(dados.main.temp),
-    local: dados.nome,
-    icone: `https://openweathermap.org/img/wn/${dados.weather.icon}.png`
+    local: dados.name,
+    icone: `https://openweathermap.org/img/wn/${dados.weather[0].icon}.png`,
   };
+  tempoInfo.innerHTML = `
+        <div class="tempoDados">
+            <h2>${infos.local}</h2>
+            <span>${infos.temperatura}</span>
+        </div>
+            
+        <img src="${infos.icone}" width="100" alt="Sol e nuvens">
   
+  `;
 });

@@ -15,7 +15,7 @@ console.log(input);
 console.log(form);
 form === null || form === void 0 ? void 0 : form.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
     event.preventDefault();
-    if (!input)
+    if (!input || !tempoInfo)
         return;
     const localização = input.value;
     if (localização.length < 3) {
@@ -27,7 +27,16 @@ form === null || form === void 0 ? void 0 : form.addEventListener("submit", (eve
     console.log(dados);
     const infos = {
         temperatura: Math.round(dados.main.temp),
-        local: dados.nome,
-        icone: `https://openweathermap.org/img/wn/${dados.weather.icon}.png`
+        local: dados.name,
+        icone: `https://openweathermap.org/img/wn/${dados.weather[0].icon}.png`,
     };
+    tempoInfo.innerHTML = `
+        <div class="tempoDados">
+            <h2>${infos.local}</h2>
+            <span>${infos.temperatura}</span>
+        </div>
+            
+        <img src="${infos.icone}" width="100" alt="Sol e nuvens">
+  
+  `;
 }));
