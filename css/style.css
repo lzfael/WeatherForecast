@@ -5,6 +5,7 @@
 }
 body{
     background-color: rgb(26, 34, 58);
+    font-family: 'Lato', sans-serif;
     color: #fff;
     height: 100vh;
     display: flex;
