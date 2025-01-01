@@ -15,6 +15,7 @@ form?.addEventListener("submit", async (event) => {
     alert("Digite uma localização válida");
     return;
   }
+  try{
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${localização}&appid=5db2cb028d7ad8fd287db19fd4df58be&lang=pt_br&units=metric`
   );
@@ -36,4 +37,8 @@ form?.addEventListener("submit", async (event) => {
         <img src="${infos.icone}" width="100" alt="Sol e nuvens">
   
   `;
+}catch(error){
+    alert("Localização não encontrada!");
+    console.log("Erro: ", error);
+}
 });

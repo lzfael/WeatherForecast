@@ -22,15 +22,16 @@ form === null || form === void 0 ? void 0 : form.addEventListener("submit", (eve
         alert("Digite uma localização válida");
         return;
     }
-    const response = yield fetch(`https://api.openweathermap.org/data/2.5/weather?q=${localização}&appid=5db2cb028d7ad8fd287db19fd4df58be&lang=pt_br&units=metric`);
-    const dados = yield response.json();
-    console.log(dados);
-    const infos = {
-        temperatura: Math.round(dados.main.temp),
-        local: dados.name,
-        icone: `https://openweathermap.org/img/wn/${dados.weather[0].icon}.png`,
-    };
-    tempoInfo.innerHTML = `
+    try {
+        const response = yield fetch(`https://api.openweathermap.org/data/2.5/weather?q=${localização}&appid=5db2cb028d7ad8fd287db19fd4df58be&lang=pt_br&units=metric`);
+        const dados = yield response.json();
+        console.log(dados);
+        const infos = {
+            temperatura: Math.round(dados.main.temp),
+            local: dados.name,
+            icone: `https://openweathermap.org/img/wn/${dados.weather[0].icon}.png`,
+        };
+        tempoInfo.innerHTML = `
         <div class="tempoDados">
             <h2>${infos.local}</h2>
             <span>${infos.temperatura}</span>
@@ -39,4 +40,9 @@ form === null || form === void 0 ? void 0 : form.addEventListener("submit", (eve
         <img src="${infos.icone}" width="100" alt="Sol e nuvens">
   
   `;
+    }
+    catch (error) {
+        alert("Localização não encontrada!");
+        console.log("Erro: ", error);
+    }
 }));
