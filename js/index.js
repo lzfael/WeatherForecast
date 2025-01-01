@@ -27,7 +27,7 @@ form === null || form === void 0 ? void 0 : form.addEventListener("submit", (eve
         const dados = yield response.json();
         console.log(dados);
         const infos = {
-            temperatura: Math.round(dados.main.temp),
+            temperatura: `${Math.round(dados.main.temp)} °C`,
             local: dados.name,
             icone: `https://openweathermap.org/img/wn/${dados.weather[0].icon}.png`,
         };
